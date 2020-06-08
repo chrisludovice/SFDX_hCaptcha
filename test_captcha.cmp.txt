@@ -1,0 +1,51 @@
+<!-- aura mark up -- >
+
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="hcaptchaCreateCase">
+	<aura:attribute name="subject" type="String"/>
+    <aura:attribute name="desc" type="String"/>
+    <ltng:require scripts="{!$Resource.hcaptcha}"/>
+    <lightning:card title="">
+    <div align="center" style="padding-top:50px;">               
+    	<p  style="padding-bottom:10px;">CASE SAMPLE FORM with HPCAPTCHA.</p>
+        <p style="padding-bottom:10px;">Subject:<lightning:input value="{!v.subject}"/></p>
+        <p style="padding-bottom:10px;">Description:<lightning:input value="{!v.desc}"/></p>
+   </div>
+    <br/>
+   <div align="center" class="h-captcha" data-sitekey="d70a3177-d43e-497e-befe-558f7cb22a61"></div><br/>
+   <div align="center"><lightning:button onclick="{!c.Submit}" label="Submit" variant="brand"/></div>
+   </lightning:card>
+</aura:component>
+
+<!-- controller -- >
+
+({
+	Submit : function(component, event, helper){
+        var h = document.getElementsByName("h-captcha-response")[0].value;
+        h = 1+h;
+        var subj = component.get("v.subject");
+        var desc = component.get("v.desc");
+        if(h!=1 && subj!=null)
+        	helper.verifyCaptcha(component,event,helper,subj,desc);
+       else alert("Please complete the form correctly.");
+    }
+})
+
+<!-- helper -- >
+
+({
+	 verifyCaptcha : function(component,event,helper,subj,desc){       
+        var insertDB = component.get("c.verifyForm");
+        var response = document.getElementsByName("h-captcha-response")[0].value;
+        insertDB.setParams({"captchaResponse":response,"subject":subj,"description":desc});
+        insertDB.setCallback(
+            this,
+            function(ret) {
+                var response = ret.getReturnValue();
+                if(response)
+                    alert("SUCCESSFUL: The response is "+response); // verify hcaptch json response
+                else alert("ERROR: The response is "+response);
+            }
+        );
+        $A.enqueueAction(insertDB);
+    }
+})

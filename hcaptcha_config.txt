@@ -1,0 +1,4 @@
+1. Include the hCaptcha javascript in your LEX as a static resource saved as public cache.  
+Resource: https://docs.hcaptcha.com/
+2. Whitelist https://hcaptcha.com/siteverify from your Remote Site Setting.
+3. Include assets.hcaptcha.com in your CSP Trusted Sites.

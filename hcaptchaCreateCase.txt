@@ -1,0 +1,51 @@
+/**
+*author: Chris Ludovice
+*@date : 06.08.2020
+*description: apex class controller responsible for:
+	- verification of token validity in the hcapatcha API endpoint.
+	- creation of web case in the database.
+@revision(s)
+ */
+public class hcaptchaCreateCase {
+    @AuraEnabled
+    public static Boolean verifyForm(String captchaResponse,String subject,String description){
+        
+        //Instantiate an httpRequest       
+        HttpRequest request = new HttpRequest();
+        String key='SECRET_KEY'; // replace with your secret key
+        String url='https://hcaptcha.com/siteverify?response='+captchaResponse+'&secret='+key; 
+     	request.setEndpoint(url);
+        request.setMethod('POST');
+           
+        Http http = new Http();
+        HttpResponse response = new HttpResponse();
+        response = http.send(request);        
+        Json2Apex res = new Json2Apex();       
+        if (response.getStatusCode() == 200) {
+            try{ 
+                res = parse(response.getBody()); // parse hcaptcha json response to apex object
+            }
+            catch(Exception e) {
+    		System.debug('The following exception has occurred: ' + e.getMessage());
+	    }
+        }        
+        Case c = new Case();
+        c.Subject=subject;
+        c.Type='TEST';
+        c.Status='New';
+        c.Description=description;
+        c.Origin='Web';      
+        if(res.success) 
+       		insert c;
+        
+        return res.success;
+    }    
+    public class JSON2Apex{ // create wrapper class to parse hcaptcha payload to apex objects 
+        public Boolean success;
+        public String challenge_ts;
+	    public String hostname;
+    }
+	public static JSON2Apex parse(String json){
+            return (JSON2Apex) System.JSON.deserialize(json, JSON2Apex.class);		
+	}
+}

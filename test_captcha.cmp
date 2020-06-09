@@ -1,6 +1,6 @@
 <!-- aura mark up -- >
 
-<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="hcaptchaCreateCase">
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes" access="global" controller="hcaptchaCreateCase">
 	<aura:attribute name="subject" type="String"/>
     <aura:attribute name="desc" type="String"/>
     <ltng:require scripts="{!$Resource.hcaptcha}"/>

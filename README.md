@@ -43,4 +43,6 @@ Note: *Since js is not automatically served from hcaptcha's server in LEX, it's 
   ```
   d. Open the apex cls file to check the exact POST request code version for VFP and Aura controllers. <br/>
   
+  *******************************************************************************************************
+  **Reference:**
   API docs: https://docs.hcaptcha.com/ 

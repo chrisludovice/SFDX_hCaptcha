@@ -5,10 +5,10 @@
      </style>
 	 <script>window.setTimeout(SetHiddenValue,6000)</script>
     <script>
-        function setToken(){
-            document.getElementById("load").style.display = "inline";
+        function setToken(){            
             var h = document.getElementsByName("h-captcha-response")[0].value;
             SetHiddenValue(h);
+	    document.getElementById("load").style.display = "inline";
         }
     </script>        
     <div align="center" style="padding-top:50px;height:400px;width:375px;background-color:white">

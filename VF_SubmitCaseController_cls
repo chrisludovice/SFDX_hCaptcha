@@ -1,0 +1,77 @@
+/**
+*author: Chris Ludovice
+*@date : 06.09.2020
+*description: apex class controller responsible for:
+- verification of token validity in the hpcapatch API endpoint.
+- creation of web case in the database
+@revision(s)
+*/
+public class SubmitCaseController {    
+    public Case c {get;set;}
+    public String msg {get;set;}
+    String token;
+    Json2Apex res; 
+    
+    public SubmitCaseController() {
+        c = new Case();
+        token=null;
+        msg=null;
+        res = new Json2Apex(); 
+    }
+    public PageReference getToken() {
+         return null;
+     }
+    public PageReference submitCase() {
+        token = ApexPages.currentPage().getParameters().get('myParam');
+        if (token.length()<1) {
+            msg='SECURITY CHECK: Make sure you\'\re human';
+            return null;
+        } else {
+            try {                
+                //Instantiate an httpRequest       
+                HttpRequest request = new HttpRequest();
+                String key='SECRET_KEY'; // replace with your secret key
+                String url='https://hcaptcha.com/siteverify?response='+token+'&secret='+key; 
+                request.setEndpoint(url);
+                request.setMethod('POST');
+                
+                Http http = new Http();
+                HttpResponse response = new HttpResponse();
+                response = http.send(request);              
+                if (response.getStatusCode() == 200) {
+                    try{ 
+                        res = parse(response.getBody()); // parse hcaptcha json response to apex object
+                        system.debug(res);
+                    }
+                    catch(Exception e) {
+                        System.debug('The following exception has occurred: ' + e.getMessage());
+                    }
+                }     
+                
+                // Insert the case
+                c.Type='TEST';
+                c.Status='New';
+                c.Origin='Web';
+                if(res.success){
+                	INSERT c;
+                    c.Subject=null;
+                    c.Description=null;
+                    msg='SUCCESSFUL: The response is '+res.success+'.';
+                }
+                else msg='FAILED: The response is '+res.success+'.';              
+             	return null;             
+            } catch (Exception e){
+                ApexPages.addMessages(e);
+                return null;
+            }
+        }
+    }
+    public class JSON2Apex{ // create wrapper class to parse hcaptcha payload to apex objects 
+        public Boolean success;
+        public String challenge_ts;
+        public String hostname;
+    }
+    public static JSON2Apex parse(String json){
+        return (JSON2Apex) System.JSON.deserialize(json, JSON2Apex.class);		
+    }
+}

@@ -1,0 +1,48 @@
+<apex:page controller="SubmitCaseController" lightningStylesheets="true" standardStylesheets="false">
+    <script async="true" defer="true" src="https://hcaptcha.com/1/api.js"></script>  
+      <style>
+          background-color: #FFFFFF !important;
+     </style>
+	 <script>window.setTimeout(SetHiddenValue,6000)</script>
+    <script>
+        function setToken(){
+            document.getElementById("load").style.display = "inline";
+            var h = document.getElementsByName("h-captcha-response")[0].value;
+            SetHiddenValue(h);
+        }
+    </script>        
+    <div align="center" style="padding-top:50px;height:400px;width:375px;background-color:white">
+    <apex:form id="f">
+        <apex:outputPanel id="Panel1">
+         <apex:pageblock id="p1">
+         <apex:pageMessages />
+             <apex:actionFunction name="SetHiddenValue" action="{!submitCase}" rerender="Panel1" status="myStatus">
+                <apex:param name="myParam" value=""/>
+            </apex:actionFunction>
+         <h1><p  style="padding-bottom:10px;">CASE SAMPLE FORM with HPCAPTCHA.</p></h1> 
+        <table style="padding-bottom:10px;">
+            <tr >
+                <th>Subject:</th>
+                <td><apex:inputText required="true" value="{!c.Subject}" /></td>
+            </tr>
+            <tr>
+                <th>Your Problem:</th>
+                <td><apex:inputTextArea required="true" rows="5" value="{!c.Description}"></apex:inputTextArea></td>
+            </tr>
+        </table>
+        <div align="center" class="h-captcha" data-sitekey="YOUR_KEY" style="padding-bottom:10px;"></div>
+       <div align="center" style="padding-bottom:10px;">
+           <apex:commandButton value="Submit Case" onclick="setToken()" action="{!getToken}" reRender="Panel1"/>
+    </div>
+         <span style="display:none;" id="load">
+         <img src="YOUR_SPINNER_IMAGE" width="25" height="25" />
+         <apex:outputLabel value="Loading..."/>
+         </span>
+       <apex:actionStatus startText="" id="myStatus">
+  		<apex:facet name="stop">{!msg}</apex:facet>
+  		</apex:actionStatus>
+     </apex:pageblock>
+     </apex:outputPanel>
+     </apex:form>  
+    </div>
+</apex:page>

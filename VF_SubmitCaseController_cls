@@ -54,8 +54,8 @@ public class SubmitCaseController {
                 c.Origin='Web';
                 if(res.success){
                 	INSERT c;
-                    c.Subject=null;
-                    c.Description=null;
+                  /*  c.Subject=null;
+                    c.Description=null; */
                     msg='SUCCESSFUL: The response is '+res.success+'.';
                 }
                 else msg='FAILED: The response is '+res.success+'.';              

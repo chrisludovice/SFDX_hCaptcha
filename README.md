@@ -20,7 +20,7 @@
   ```
 Note: *Since in LEX, js is not automatically served from hcaptcha's server, it's your job to update it periodically.* :shipit:
 
-**Step 4:** <br/>
+**Step 4: Add the hCaptcha Widget to your component / vfp** <br/>
  a. Add this HTML code where you want to show the hCaptcha button, for example inside a case form. <br/>
  b. Remember to replace "your_site_key" with your actual site key. <br/>
  
@@ -28,7 +28,7 @@ Note: *Since in LEX, js is not automatically served from hcaptcha's server, it's
  <div class="h-captcha" data-sitekey="your_site_key"></div>"
  ```
  
-**Step 5:** Validate the result on your backend server. <br/>
+**Step 5: Validate the result on your backend server.** <br/>
  a. When the captcha succeeded, the hCaptcha script inserted a token into your form data.
   ```ruby
  <textarea name="h-captcha-response">CLIENT-RESPONSE</textarea>

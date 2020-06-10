@@ -18,7 +18,7 @@
  ```ruby
  <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
   ```
-Note: *Since in LEX, js is not automatically served from hcaptcha's server, it's your responsiblity to update it periodically.* :shipit:
+Note: *Since in LEX, js is not automatically served from hcaptcha's server, it's your job to update it periodically.* :shipit:
 
 **Step 4:** <br/>
  a. Add this HTML code where you want to show the hCaptcha button, for example inside a case form. <br/>

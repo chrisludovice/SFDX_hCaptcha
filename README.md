@@ -1,8 +1,9 @@
 # SFDX_hCaptcha
 ## This project shows how to simply integrate HCaptcha into your Salesforce using VFP and Aura Frameworks.
 
-###### API docs: https://docs.hcaptcha.com/ <br/>
+###### Important Note: This only contains my version of solution but may not be the most efficient one; and might still be subject for refactoring. 
 
+API docs: https://docs.hcaptcha.com/ <br/>
 *******************************************************************************************************
 **Step 1: Sign up on hCaptcha.com** <br/>
   a. You’ll need your "site key" and "secret" to proceed.

@@ -12,13 +12,14 @@
   b. Include assets.hcaptcha.com in your CSP Trusted Sites.
 
  Step 3: Add the JavaScript Library <br/>
-  a. LEX: Include the hCaptcha js as a static resource. <br/>
+  a. LEX: Include the hCaptcha js as a static resource. JS can't be directly served from cmp. <br/>
   b. VFP: Simply add the js library to your vf page.<br/>
 
  ```ruby
  <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
   ```
-  
+Note: *Since in LEX, js is not automatically served from hcaptcha's server, it's your responsiblity to update it periodically.*
+
  Step 4: <br/>
  a. Add this HTML code where you want to show the hCaptcha button, for example inside a case form. <br/>
  b. Remember to replace "your_site_key" with your actual site key. <br/>

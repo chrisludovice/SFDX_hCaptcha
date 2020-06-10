@@ -30,7 +30,7 @@
  Step 5: Validate the result on your backend server. <br/>
  a. When the captcha succeeded, the hCaptcha script inserted a token into your form data.
   ```ruby
- <textarea name="h-captcha-response">
+ <textarea name="h-captcha-response">CLIENT-RESPONSE</textarea>
   ```
  b. Get the value of "h-captcha-response" during form submission using simple js hack. You'll need this token as one of the parameters in your API request.
   ```ruby

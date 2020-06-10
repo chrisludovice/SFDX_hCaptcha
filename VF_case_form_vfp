@@ -1,9 +1,9 @@
 <apex:page controller="SubmitCaseController" lightningStylesheets="true" standardStylesheets="false">
     <script async="true" defer="true" src="https://hcaptcha.com/1/api.js"></script>  
-      <style>
-          background-color: #FFFFFF !important;
-     </style>
-	 <script>window.setTimeout(SetHiddenValue,6000)</script>
+    <style>
+    	background-color: #FFFFFF !important;
+    </style>
+    <script>window.setTimeout(SetHiddenValue,6000)</script>
     <script>
         function setToken(){            
             var h = document.getElementsByName("h-captcha-response")[0].value;

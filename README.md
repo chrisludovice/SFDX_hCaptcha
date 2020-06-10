@@ -4,8 +4,6 @@
 ###### Important Note: This only contains my version of solution but may not be the most efficient one; and might still be subject for refactoring. 
 
 *******************************************************************************************************
-API docs: https://docs.hcaptcha.com/ <br/>
-
 **Step 1: Sign up on hCaptcha.com** <br/>
   a. You’ll need your "site key" and "secret" to proceed.
 
@@ -43,4 +41,6 @@ Note: *Since js is not automatically served from hcaptcha's server in LEX, it's 
   ```ruby
  curl -d "response=CLIENT-RESPONSE&secret=YOUR-SECRET" -X POST https://hcaptcha.com/siteverify
   ```
-  d. Open the apex cls file to check the exact POST request code version for VFP and Aura controllers.
+  d. Open the apex cls file to check the exact POST request code version for VFP and Aura controllers. <br/>
+  
+  API docs: https://docs.hcaptcha.com/ 

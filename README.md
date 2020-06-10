@@ -12,7 +12,7 @@
   b. Include assets.hcaptcha.com in your CSP Trusted Sites.
 
 **Step 3: Add the JavaScript Library** <br/>
-  a. LEX: Include the hCaptcha js as a static resource. JS can't be directly served from cmp. <br/>
+  a. LEX: Include the hCaptcha js as a static resource. JS can't be directly added from cmp. <br/>
   b. VFP: Simply add the js library to your vf page.<br/>
 
  ```ruby

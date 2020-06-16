@@ -12,14 +12,17 @@ public class hcaptchaCreateCase {
         
         //Instantiate an httpRequest       
         HttpRequest request = new HttpRequest();
-        String key='SECRET_KEY'; // replace with your secret key
-        String url='https://hcaptcha.com/siteverify?response='+captchaResponse+'&secret='+key; 
-     	request.setEndpoint(url);
+        String key='SECRET_KEY'; // SECRET_KEY replace with your secret key
+        String url='https://hcaptcha.com/siteverify'; 
+        request.setEndpoint(url);
         request.setMethod('POST');
-           
+        request.setHeader('Content-Type', 'application/x-www-form-urlencoded');
+        String payload = 'response='+EncodingUtil.urlEncode(token,'UTF-8')+'&secret='+EncodingUtil.urlEncode(key,'UTF-8');
+        request.setBody(payload);
+                
         Http http = new Http();
         HttpResponse response = new HttpResponse();
-        response = http.send(request);        
+        response = http.send(request);       
         Json2Apex res = new Json2Apex();       
         if (response.getStatusCode() == 200) {
             try{ 

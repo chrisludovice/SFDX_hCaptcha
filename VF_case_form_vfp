@@ -1,47 +1,67 @@
 <apex:page controller="SubmitCaseController" lightningStylesheets="true" standardStylesheets="false" showHeader="false" sidebar="false">
     <script async="true" defer="true" src="https://hcaptcha.com/1/api.js"></script>  
       <style>
-          background-color: #FFFFFF !important;
+        .button{
+        display: block;
+        width: 100px;
+        height: 20px;
+        background: #2F4F4F;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        line-height: 25px;
+        }
+}
      </style>
 	<script>window.setTimeout(SetHiddenValue,6000)</script>
     <script>
-        function setToken(){            
-            var h = document.getElementsByName("h-captcha-response")[0].value;
-            SetHiddenValue(h);
-            document.getElementById("load").style.display = "inline";
-        }
+        function setToken(){             
+            var s= document.getElementById('{!$Component.f.p1.sbj}').value;
+            var d = document.getElementById('{!$Component.f.p1.desc}').value;
+            if(s.length>0 && d.length>0){
+                var h = document.getElementsByName("h-captcha-response")[0].value;
+                SetHiddenValue(h);
+                document.getElementById("err").style.display = "none";
+        	}
+    		else document.getElementById("err").style.display = "inline";
+       }
     </script>        
     <div align="center" style="padding-top:50px;height:400px;width:375px;background-color:white">
     <apex:form id="f">
-         <apex:pageblock id="p1">
-         <apex:pageMessages />
-         <h1><p  style="padding-bottom:10px;">CASE SAMPLE FORM with HPCAPTCHA.</p></h1> 
-        <table style="padding-bottom:10px;">
-            <tr >
-                <th>Subject:</th>
-                <td><apex:inputText required="true" value="{!c.Subject}" /></td>
-            </tr>
-            <tr>
-                <th>Your Problem:</th>
-                <td><apex:inputTextArea required="true" rows="5" value="{!c.Description}"></apex:inputTextArea></td>
-            </tr>
-        </table>
-        <div align="center" class="h-captcha" data-sitekey="YOUR_KEY" style="padding-bottom:10px;"></div>
-       <div align="center" style="padding-bottom:10px;">
-           <apex:commandButton value="Submit Case" onclick="setToken()" action="{!getToken}" reRender="Panel1"/>
-    </div>
-    </apex:pageblock>
-     <apex:outputPanel id="Panel1">
          <apex:actionFunction name="SetHiddenValue" action="{!submitCase}" rerender="Panel1" status="myStatus">
          <apex:param name="myParam" value=""/>
          </apex:actionFunction>
+         <apex:pageblock id="p1">
+         <apex:pageMessages />
+         <h1><p  style="padding-bottom:10px;">CASE SAMPLE FORM with HPCAPTCHA.</p></h1> 
+        <table style="padding-bottom:10px;" id="tb" class="tb">
+            <tr >
+                <th>Subject:</th>
+                <td><apex:inputText required="true" value="{!c.Subject}" id="sbj"/></td>
+            </tr>
+            <tr>
+                <th>Your Problem:</th>
+                <td><apex:inputTextArea required="true" rows="5" value="{!c.Description}" id="desc"></apex:inputTextArea></td>
+            </tr>
+        </table>
+        <div align="center" class="h-captcha" data-sitekey="d70a3177-d43e-497e-befe-558f7cb22a61" style="padding-bottom:10px;"></div>
+       <div align="center" style="padding-bottom:10px;">
+        <!--   <apex:commandButton value="Submit Case" onclick="setToken()" action="{!getToken}" reRender="Panel1"/> -->
+           <a class="button" onclick="setToken()" >Submit Case</a>
+    </div>
+    </apex:pageblock>
+     <apex:outputPanel id="Panel1">
+         <!--
          <span style="display:none;" id="load">
-         <img src="YOUR_SPINNER_IMAGE" width="25" height="25" />
+         <img src="{!$Resource.hcaptcha_spinner}" width="25" height="25" />
          <apex:outputLabel value="Loading..."/>
-         </span>
+         </span> -->
        <apex:actionStatus startText="" id="myStatus">
   		<apex:facet name="stop">{!msg}</apex:facet>
   		</apex:actionStatus>
+        <span id="err" style="display:none">All fields are required!</span>
      </apex:outputPanel>
      </apex:form>  
     </div>

@@ -25,12 +25,11 @@ public class SubmitCaseController {
         token = ApexPages.currentPage().getParameters().get('myParam');
         if (token.length()<1) {
             msg='SECURITY CHECK: Make sure you\'\re human';
-            return null;
         } else {
             try {                
                 //Instantiate an httpRequest       
                 HttpRequest request = new HttpRequest();
-                String key='SECRET_KEY'; // replace with your secret key
+                String key='0x65073a3D04517B8b544d4BF9243cDA3332a849E5'; // SECRET_KEY replace with your secret key
                 String url='https://hcaptcha.com/siteverify?response='+token+'&secret='+key; 
                 request.setEndpoint(url);
                 request.setMethod('POST');
@@ -56,13 +55,12 @@ public class SubmitCaseController {
                 	INSERT c;
                     msg='SUCCESSFUL: The response is '+res.success+'.';
                 }
-                else msg='FAILED: The response is '+res.success+'.';              
-             	return null;             
+                else msg='FAILED: The response is '+res.success+'.';                         
             } catch (Exception e){
                 ApexPages.addMessages(e);
-                return null;
             }
         }
+        return null;
     }
     public class JSON2Apex{ // create wrapper class to parse hcaptcha payload to apex objects 
         public Boolean success;

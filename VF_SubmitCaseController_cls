@@ -34,8 +34,8 @@ public class SubmitCaseController {
                 request.setEndpoint(url);
                 request.setMethod('POST');
                 request.setHeader('Content-Type', 'application/x-www-form-urlencoded');
-				String payload = 'response='+EncodingUtil.urlEncode(token,'UTF-8')+'&secret='+EncodingUtil.urlEncode(key,'UTF-8');
-				request.setBody(payload);
+		String payload = 'response='+EncodingUtil.urlEncode(token,'UTF-8')+'&secret='+EncodingUtil.urlEncode(key,'UTF-8');
+		request.setBody(payload);
                 
                 Http http = new Http();
                 HttpResponse response = new HttpResponse();

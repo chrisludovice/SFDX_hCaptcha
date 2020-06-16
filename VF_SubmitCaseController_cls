@@ -18,9 +18,6 @@ public class SubmitCaseController {
         msg=null;
         res = new Json2Apex(); 
     }
-    public PageReference getToken() {
-         return null;
-     }
     public PageReference submitCase() {
         token = ApexPages.currentPage().getParameters().get('myParam');
         if (token.length()<1) {

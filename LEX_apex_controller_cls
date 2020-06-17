@@ -6,7 +6,7 @@
 	- creation of web case in the database.
 @revision(s)
  */
-public class hcaptchaCreateCase {
+public class HcaptchaCreateCase {
     @AuraEnabled
     public static Boolean verifyForm(String captchaResponse,String subject,String description){
         

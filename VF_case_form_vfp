@@ -1,20 +1,5 @@
 <apex:page controller="SubmitCaseController" lightningStylesheets="true" standardStylesheets="false" showHeader="false" sidebar="false">
     <script async="true" defer="true" src="https://hcaptcha.com/1/api.js"></script>  
-      <style>
-        .button{
-        display: block;
-        width: 100px;
-        height: 20px;
-        background: #2F4F4F;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        line-height: 25px;
-        }
-}
-     </style>
 	<script>window.setTimeout(SetHiddenValue,6000)</script>
     <script>
         function setToken(){             
@@ -49,7 +34,7 @@
         <div align="center" class="h-captcha" data-sitekey="YOUR_KEY" style="padding-bottom:10px;"></div>
        <div align="center" style="padding-bottom:10px;">
         <!--   <apex:commandButton value="Submit Case" onclick="setToken()" action="{!getToken}" reRender="Panel1"/> -->
-           <a class="button" onclick="setToken()" >Submit Case</a>
+           <a onclick="setToken()" ><button type="button">Submit Case</button></a>
     </div>
     </apex:pageblock>
      <apex:outputPanel id="Panel1">

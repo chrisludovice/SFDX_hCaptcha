@@ -24,11 +24,11 @@
         <table style="padding-bottom:10px;" id="tb" class="tb">
             <tr >
                 <th>Subject:</th>
-                <td><apex:inputText required="true" value="{!c.Subject}" id="sbj"/></td>
+                <td><apex:inputText value="{!c.Subject}" id="sbj"/></td>
             </tr>
             <tr>
                 <th>Your Problem:</th>
-                <td><apex:inputTextArea required="true" rows="5" value="{!c.Description}" id="desc"></apex:inputTextArea></td>
+                <td><apex:inputTextArea rows="5" value="{!c.Description}" id="desc"></apex:inputTextArea></td>
             </tr>
         </table>
         <div align="center" class="h-captcha" data-sitekey="YOUR_KEY" style="padding-bottom:10px;"></div>

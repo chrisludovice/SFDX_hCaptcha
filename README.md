@@ -9,7 +9,7 @@
 
 **Step 2: Salesforce Security Configuration** <br/>
   a. Whitelist https://hcaptcha.com/siteverify from your Remote Site Setting. <br/>
-  b. Include assets.hcaptcha.com in your CSP Trusted Sites.
+  b. LEX:Include assets.hcaptcha.com in your CSP Trusted Sites.
 
 **Step 3: Add the JavaScript Library** <br/>
   a. LEX: Include the hCaptcha js as a static resource. JS can't be directly added in cmp. <br/>
